@@ -124,7 +124,7 @@ const options = {
         'accept': 'application/json',
         "content-type": "application/json"
     },
-    body: JSON.stringify(order),
+    body: JSON.stringify("order"),
 };
 
 document.getElementById("order").addEventListener('click', function (event) {
@@ -135,18 +135,16 @@ document.getElementById("order").addEventListener('click', function (event) {
     let city = document.getElementById("city").value;
     let email = document.getElementById("email").value;
     let contact = {
-        firstName: document.getElementById("firstName").value,
-        lastName: document.getElementById("lastName").value,
-        address: document.getElementById("address").value,
-        city: document.getElementById("city").value,
-        email:document.getElementById("email").value,
+        firstName: firstName,
+        lastName: lastName,
+        address: address,
+        city: city,
+        email:email,
     };
-    let order= {
+    let order = {
         contact,
-        products,
-    };
-    /*new client (firstName, lastName, address, city, email);
-    console.log(order);
+        products
+    }
     /*if (firstName||lastName||address||city||email ==null){
         console.log("error client parameters");
         return;
@@ -158,7 +156,7 @@ document.getElementById("order").addEventListener('click', function (event) {
     .then((data)=>{
         console.log("voici le retour de data");
         console.log(data);
-        //localStorage.clear();
+        localStorage.clear();
         localStorage.setItem("orderId", data.orderId);
         document.location.href="confirmation.html";
     })
