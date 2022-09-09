@@ -96,7 +96,7 @@ document.getElementById("addToCart").addEventListener('click', function buttonAd
              window.location.href = "../html/cart.html";
             }
             else{
-                const resultFind = cartStored.find(el => el.id===id && el.color===itemColor);
+                const resultFind = cartStored.find(el => el._id===_id && el.color===itemColor);
                 if(resultFind){
                     let newQuantity= parseInt(itemQuantity)+parseInt(resultFind.quantity);
                     resultFind.quantity=newQuantity;
