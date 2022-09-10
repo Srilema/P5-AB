@@ -133,7 +133,7 @@ const options = {
         'accept' : 'application/json',
         "content-type": "application/json"
     },
-    body: JSON.stringify("order"),
+    body: JSON.stringify(order),
 };
 
 document.getElementById("order").addEventListener('click', function (event) {
