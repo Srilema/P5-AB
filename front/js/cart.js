@@ -1,5 +1,11 @@
 let cart = JSON.parse(localStorage.getItem('cart'));
 console.table(cart);
+if(cart==null){
+    var emptyCart =document.createElement("h2");
+    document.getElementById("cart__items").appendChild(emptyCart);
+    emptyCart.innerText = "Votre panier est vide, vous ne pouvez pas commander.";
+    document.getElementById("order").disabled = true;
+};
 
 //function to calculate sum of cart, used in fillcart()
 function sumOfItems() {
@@ -107,6 +113,9 @@ document.getElementById("lastName").pattern = "(?![ -&(-,.-@[-`{-}]*[\-]{2,})^[a
 document.getElementById("address").pattern = "(?![!-&(-+.-@[-`{-}]*[\-]{2,})^[a-zA-ZÁ-þ0-9\-\'/ ]{3,50}$";
 document.getElementById("city").pattern = "(?![ -&(-,.-@[-`{-}]*[\-]{2,})^[a-zA-ZÁ-þ0-9\-\']{3,50}$";
 
+//make sure input match pattern
+//Not sure if needed since input area has a regex pattern and a required + check on submit
+
 //create array of ID
 var products = [];
 function fillProducts() {
@@ -121,7 +130,7 @@ console.table(products);
 const options = {
     method: 'POST',
     header: {
-        'accept': 'application/json',
+        'accept' : 'application/json',
         "content-type": "application/json"
     },
     body: JSON.stringify("order"),
@@ -144,7 +153,8 @@ document.getElementById("order").addEventListener('click', function (event) {
     let order = {
         contact,
         products
-    }
+    };
+    console.log(JSON.stringify(order));
     /*if (firstName||lastName||address||city||email ==null){
         console.log("error client parameters");
         return;
@@ -152,11 +162,11 @@ document.getElementById("order").addEventListener('click', function (event) {
     else{*/
     //Post to server client+cart
     fetch("http://localhost:3000/api/products/order", options)
-    .then((response)=>response.json())
-    .then((data)=>{
+    .then((response) =>response.json())
+    .then((data) =>{
         console.log("voici le retour de data");
         console.log(data);
-        localStorage.clear();
+        //localStorage.clear();
         localStorage.setItem("orderId", data.orderId);
         document.location.href="confirmation.html";
     })
