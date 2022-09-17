@@ -27,18 +27,6 @@ async function fillArticle(){
         document.getElementById("price").innerText = article.price;
         document.getElementById("description").innerText = article.description;
 
-        //hide imgUrl and altTxt
-        let imgUrlHidden = document.createElement("p");
-        imgUrlHidden.style.display = "none";
-        imgUrlHidden.id = "imgUrl";
-        document.getElementById("description").appendChild(imgUrlHidden);
-        imgUrlHidden.innerText = article.imageUrl;
-        let altTxtHidden = document.createElement("p");
-        altTxtHidden.style.display = "none";
-        altTxtHidden.id = "altTxt";
-        document.getElementById("description").appendChild(altTxtHidden);
-        altTxtHidden.innerText = article.altTxt;
-
         //Put option in select
         for (let i=0; i<article.colors.length; i++){
             let addColorsOptions = document.createElement("option");
@@ -51,14 +39,10 @@ async function fillArticle(){
 
 //create class
 class cartItem{
-    constructor(_id, color, quantity, price, imageUrl, altTxt, title){
+    constructor(_id, color, quantity){
         this._id = _id;
         this.color=color;
         this.quantity=quantity;
-        this.price=price;
-        this.imageUrl = imageUrl;
-        this.altTxt = altTxt;
-        this.title = title;
     }
 };
 console.log(cartItem);
@@ -67,12 +51,7 @@ console.log(cartItem);
 document.getElementById("addToCart").addEventListener('click', function buttonAddToCart(event){
     console.log('element clicked');
     let itemColor = document.getElementById("colors").value;
-    let itemPriceText=document.getElementById("price").innerText;
-    let itemPrice = parseInt(itemPriceText);
     let itemQuantity = parseInt(document.getElementById("quantity").value);
-    let itemImage = document.getElementById("imgUrl").innerText;
-    let itemAltTxt = document.getElementById("altTxt").innerText;
-    let itemName = document.getElementById("title").innerText;
     if (itemQuantity<1 || itemQuantity>100){
         console.log('error: quantity invalid');
         return;
@@ -83,7 +62,7 @@ document.getElementById("addToCart").addEventListener('click', function buttonAd
             return;
         }
         else{
-            let cartProduct = new cartItem(_id, itemColor, itemQuantity, itemPrice, itemImage, itemAltTxt, itemName);
+            let cartProduct = new cartItem(_id, itemColor, itemQuantity);
             console.log(cartProduct);
             var cartStored=JSON.parse(localStorage.getItem('cart'))
             console.log(cartStored);
