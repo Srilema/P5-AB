@@ -8,6 +8,10 @@ if (cart == null) {
 };
 
 //function to calculate sum of cart, used in fillcart()
+/**
+ * Ajoute nombre de produit total du panier
+ * total d'objet += article.quantity
+ */
 function sumOfItems() {
     var sumItems = 0;
     for (let i = 0; i < cart.length; i++) {
@@ -18,6 +22,11 @@ function sumOfItems() {
 };
 sumOfItems();
 
+/**
+ * Calcul prix total du panier
+ * fetch(article)
+ * .then total+=(article.price*article.quantity)
+ */
 function sumOfCart() {
     var sumPrice = 0;
     for (let i = 0; i < cart.length; i++) {
