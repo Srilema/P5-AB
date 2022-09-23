@@ -189,17 +189,17 @@ document.getElementById("order").addEventListener('click', function (event) {
         console.log("error client parameters");
         return;
     };
-    if (firstNameReg.test(firstName)||lastNameReg.test(lastName)||addressReg.test(address)||cityReg.test(city)||emailReg.test(email)===false){
+    if (firstNameReg.test(firstName)==false||lastNameReg.test(lastName)==false||addressReg.test(address)==false||cityReg.test(city)==false||emailReg.test(email)==false){
+        console.log("error reg");
         return;
     }
-    //checkPattern();
     //Post to server client+cart
     fetch("http://localhost:3000/api/products/order", options)
         .then((response) => response.json())
         .then((data) => {
             console.log("voici le retour de data");
             //localStorage.clear();
-            document.location.href = "confirmation.html" + "?orderId=" + data.orderId;
+            document.location.href = "confirmation.html?orderId=" + data.orderId;
         })
         .catch((err) => {
             alert("problème avec fetch" + err.message);
