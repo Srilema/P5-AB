@@ -198,7 +198,7 @@ document.getElementById("order").addEventListener('click', function (event) {
         .then((response) => response.json())
         .then((data) => {
             console.log("voici le retour de data");
-            //localStorage.clear();
+            localStorage.clear();
             document.location.href = "confirmation.html?orderId=" + data.orderId;
         })
         .catch((err) => {
